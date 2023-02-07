@@ -1,12 +1,10 @@
 package com.example.DemoProject.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -27,5 +25,8 @@ public class EmployeeDTO {
     private Date date;
     @Column(name = "emp_Status")
     private String Status;
+
+    @OneToMany(mappedBy = "employeeDTO")
+    private List<AddressDTO> addressDTO;
 
 }

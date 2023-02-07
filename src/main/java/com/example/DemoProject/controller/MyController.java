@@ -2,6 +2,7 @@ package com.example.DemoProject.controller;
 
 import com.example.DemoProject.Service.EmployeeService;
 import com.example.DemoProject.entity.EmployeeDTO;
+import com.example.DemoProject.pojo.Address;
 import com.example.DemoProject.pojo.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +14,10 @@ import java.util.List;
 public class MyController {
     @Autowired
     private EmployeeService employeeService;
+    private Address addressService;
+
     @GetMapping("/getEmp")
     public List<EmployeeDTO> getEmployees(){
-
         return this.employeeService.getEmployees();
     }
     @GetMapping("/emp/{empID}")

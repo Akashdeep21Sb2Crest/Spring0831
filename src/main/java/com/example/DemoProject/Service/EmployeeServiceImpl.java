@@ -1,20 +1,22 @@
 package com.example.DemoProject.Service;
 
+import com.example.DemoProject.DAO.AddressDao;
 import com.example.DemoProject.Service.EmployeeServiceImpl;
 import com.example.DemoProject.DAO.EmployeeDAO;
+import com.example.DemoProject.entity.AddressDTO;
 import com.example.DemoProject.entity.EmployeeDTO;
+import com.example.DemoProject.pojo.Address;
 import com.example.DemoProject.pojo.Employee;
 import exception.AgeNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+
 @Service
-public class EmployeeServiceImpl implements EmployeeService{
+public
+class EmployeeServiceImpl implements EmployeeService{
     @Autowired
     private EmployeeDAO employeeDAO;
     @Override
@@ -26,7 +28,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     @Override
     public EmployeeDTO getEmployees(long eid) {
 
-        return (EmployeeDTO) employeeDAO.getOne(eid);
+        return employeeDAO.getOne(eid) ;
     }
 
     @Override
@@ -38,8 +40,18 @@ public class EmployeeServiceImpl implements EmployeeService{
         employeeDTO.setAge(employee.getAge());
         Date date1 = new SimpleDateFormat("mm-dd-yyyy").parse(employee.getDate());
         employeeDTO.setDate(date1);
-       // employeeDTO.setDate(employee.getDate());
 
+        employee.getAddress();
+        List<AddressDTO> addressDTOS = new ArrayList<>();
+        for(Address address:employee.getAddress()) {
+            AddressDTO addressDTO=new AddressDTO();
+            addressDTO.setDoor_number(address.getDoor_number());
+            addressDTOS.add(addressDTO);
+            // employeeDTO.setDate(employee.getDate());
+        }
+
+        employeeDTO.setAddressDTO(addressDTOS);
+        
         int age = employee.getAge();
 
         if(age<=10){
@@ -54,6 +66,7 @@ public class EmployeeServiceImpl implements EmployeeService{
         } else if (age>=100) {
             throw new AgeNotFound("InvalidAge");
         }
+
         employeeDAO.save(employeeDTO);
         return "Saved Successfully";
     }
@@ -82,4 +95,5 @@ public class EmployeeServiceImpl implements EmployeeService{
         employeeDTO.setName("HiHello");
         return employeeDTO;
     }
+
 }

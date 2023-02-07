@@ -1,7 +1,9 @@
 package com.example.DemoProject.Service;
 
 import com.example.DemoProject.DAO.EmployeeDAO;
+import com.example.DemoProject.entity.AddressDTO;
 import com.example.DemoProject.entity.EmployeeDTO;
+import com.example.DemoProject.pojo.Address;
 import com.example.DemoProject.pojo.Employee;
 
 import java.text.ParseException;
@@ -18,5 +20,6 @@ public interface EmployeeService {
 
     public Employee cmpEmployees();
 
-    EmployeeDTO updEmployee(Employee employee);
+    public EmployeeDTO updEmployee(Employee employee);
+
 }
