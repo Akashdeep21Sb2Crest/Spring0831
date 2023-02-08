@@ -9,9 +9,13 @@ import java.util.Date;
 @Data
 @Table(name = "address")
 public class AddressDTO {
+
+    @Column(name = "address_id")
+    private Long addressID;
+
     @Id
-    @Column(name = "door_number")
-    private int door_number;
+    @Column(name = "door_num")
+    private int doorNum;
 
     @Column(name = "city")
     private String city;
@@ -23,7 +27,7 @@ public class AddressDTO {
     @Column(name = "pincode")
     private Long pincode;
 
-    @ManyToOne
-    @JoinColumn(name = "eid", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinColumn(name = "em_id", nullable = false)
     private EmployeeDTO employeeDTO;
 }

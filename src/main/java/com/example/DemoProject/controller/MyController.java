@@ -29,7 +29,7 @@ public class MyController {
     public String addEmployee(@RequestBody Employee employee) throws ParseException{
         return this.employeeService.addEmployees(employee);
     }
-    @RequestMapping(value = "/emp")
+    @RequestMapping(value = "/updemp")
     public EmployeeDTO updateEmployee(@RequestBody Employee employee){
         return this.employeeService.updEmployee(employee);
     }

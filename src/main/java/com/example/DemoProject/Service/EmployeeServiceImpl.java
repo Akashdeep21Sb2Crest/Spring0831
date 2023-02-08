@@ -27,8 +27,7 @@ class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public EmployeeDTO getEmployees(long eid) {
-
-        return employeeDAO.getOne(eid) ;
+        return employeeDAO.getOne(eid);
     }
 
     @Override
@@ -41,17 +40,6 @@ class EmployeeServiceImpl implements EmployeeService{
         Date date1 = new SimpleDateFormat("mm-dd-yyyy").parse(employee.getDate());
         employeeDTO.setDate(date1);
 
-        employee.getAddress();
-        List<AddressDTO> addressDTOS = new ArrayList<>();
-        for(Address address:employee.getAddress()) {
-            AddressDTO addressDTO=new AddressDTO();
-            addressDTO.setDoor_number(address.getDoor_number());
-            addressDTOS.add(addressDTO);
-            // employeeDTO.setDate(employee.getDate());
-        }
-
-        employeeDTO.setAddressDTO(addressDTOS);
-        
         int age = employee.getAge();
 
         if(age<=10){
@@ -67,6 +55,20 @@ class EmployeeServiceImpl implements EmployeeService{
             throw new AgeNotFound("InvalidAge");
         }
 
+        List<AddressDTO> addressDTOS = new ArrayList<>();
+        for(Address address:employee.getAddress()) {
+            AddressDTO addressDTO=new AddressDTO();
+            addressDTO.setAddressID(address.getAddressID());
+            addressDTO.setDoorNum(address.getDoorNum());
+            addressDTO.setPincode(address.getPincode());
+            addressDTO.setState(address.getState());
+            addressDTO.setCity(address.getCity());
+            addressDTO.setStreet(address.getStreet());
+            addressDTO.setEmployeeDTO(employeeDTO);
+            addressDTOS.add(addressDTO);
+            // employeeDTO.setDate(employee.getDate());
+        }
+        employeeDTO.setAddressDTO(addressDTOS);
         employeeDAO.save(employeeDTO);
         return "Saved Successfully";
     }

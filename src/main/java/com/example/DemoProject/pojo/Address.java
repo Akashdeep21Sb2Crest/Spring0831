@@ -8,12 +8,10 @@ import lombok.Data;
 @Data
 
 public class Address {
-    private long eid;
-    private int door_number;
+    private long addressID;
+    private int doorNum;
     private String city;
     private String state;
     private String street;
     private Long pincode;
-    private Employee employee;
-
 }

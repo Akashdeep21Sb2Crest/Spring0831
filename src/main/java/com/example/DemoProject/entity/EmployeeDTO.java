@@ -11,8 +11,10 @@ import java.util.List;
 @Table(name = "emp")
 public class EmployeeDTO {
 
+
     @Id
-    @Column(name = "em_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "em_id",nullable = false)
     private long eid;
 
     @Column(name = "emp_Name")
@@ -26,7 +28,7 @@ public class EmployeeDTO {
     @Column(name = "emp_Status")
     private String Status;
 
-    @OneToMany(mappedBy = "employeeDTO")
+    @OneToMany(mappedBy = "employeeDTO",cascade = CascadeType.ALL)
     private List<AddressDTO> addressDTO;
 
 }
